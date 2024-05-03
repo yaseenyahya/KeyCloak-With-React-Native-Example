@@ -1,79 +1,49 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Keycloak Integration with React Native Example
 
-# Getting Started
+This repository provides an example of integrating Keycloak authentication with a React Native application. The example demonstrates obtaining login access tokens and refresh tokens from Keycloak for existing users.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Configuration Steps
 
-## Step 1: Start the Metro Server
+### AndroidManifest.xml
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+In your `AndroidManifest.xml` file, ensure that `android:usesCleartextTraffic="true"` is added. You can refer to the screenshot below for guidance:
 
-To start Metro, run the following command from the _root_ of your React Native project:
+![Screenshot 1](screenshot1.png)
 
-```bash
-# using npm
-npm start
+### android/app/build.gradle
 
-# OR using Yarn
-yarn start
+Add the following configuration in your `android/app/build.gradle` file:
+
+```groovy
+manifestPlaceholders = [
+    appAuthRedirectScheme: 'io.identityserver.demo'
+]
 ```
 
-## Step 2: Start your Application
+You can find an example in the screenshot below:
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+![Screenshot 2](screenshot2.png)
 
-### For Android
+### Keycloak Settings
 
-```bash
-# using npm
-npm run android
+1. **Change Issuer Host and Port, Client ID, and Redirect URL:**
 
-# OR using Yarn
-yarn android
-```
+   Update the Keycloak settings to match the values provided in the `manifestPlaceholders`. Refer to the screenshot for details:
 
-### For iOS
+   ![Screenshot 3](screenshot3.png)
 
-```bash
-# using npm
-npm run ios
+2. **Add Redirect URIs:**
 
-# OR using Yarn
-yarn ios
-```
+   Configure redirect URIs in Keycloak settings. Refer to the screenshot below for guidance:
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+   ![Keycloak Screenshot 1](key1.jpeg)
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+3. **Additional Authentication Flow Settings:**
 
-## Step 3: Modifying your App
+   Adjust additional authentication flow settings in Keycloak. Refer to the screenshot below for guidance:
 
-Now that you have successfully run the app, let's modify it.
+   ![Keycloak Screenshot 2](key2.jpeg)
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+## Usage
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+After configuring the Keycloak settings and integrating them into your React Native application, users should be able to authenticate using Keycloak and obtain access tokens and refresh tokens.
